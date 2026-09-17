@@ -1,0 +1,1868 @@
+/*
+ * Screen layer — structures that belong to the product screens on Figma pages
+ * "10 — Onboarding" through "24 — System States".
+ */
+
+/* ------------------------------------------------------------------ Panels */
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  padding: calc(var(--space-20) - 1px);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background: var(--color-background-surface);
+}
+
+.panel__title {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.panel__subtitle {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+.section-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-16);
+}
+
+.section-header__title {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.section-header__link {
+  border: 0;
+  background: none;
+  padding: 0;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--color-brand-text);
+}
+
+.section-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+/* --------------------------------------------------------------- KPI cards */
+/* Figma: Dashboard KPI Row (7:139) — 84px cards, label 13/18, value 22/30. */
+
+.kpi-row {
+  display: flex;
+  gap: var(--space-12);
+}
+
+.kpi-card {
+  display: flex;
+  flex: 1 0 0;
+  min-width: 0;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: calc(var(--space-16) - 1px);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background: var(--color-background-surface);
+}
+
+.kpi-card__label {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kpi-card__value {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.kpi-card--accent {
+  background: var(--color-brand-subtle);
+}
+
+.kpi-card--accent .kpi-card__value {
+  color: var(--color-brand-text);
+}
+
+/* ------------------------------------------------------ Status distribution */
+/* Figma: Shipment Status Overview (7:159) — 18px bar, 4px gaps, 3px radius. */
+
+.overview-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-16);
+}
+
+.overview-row .panel--overview {
+  width: 700px;
+  height: 220px;
+  flex: none;
+}
+
+.overview-row .panel--actions {
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+.stacked-bar {
+  display: flex;
+  gap: var(--space-4);
+  width: 640px;
+  max-width: 100%;
+  height: 18px;
+}
+
+.stacked-bar__segment {
+  height: 18px;
+  border-radius: 3px;
+}
+
+.stacked-bar__segment--delivered {
+  background: var(--color-status-success);
+}
+
+.stacked-bar__segment--transit {
+  background: var(--color-brand-primary);
+}
+
+.stacked-bar__segment--ready {
+  background: var(--color-status-warning);
+}
+
+.stacked-bar__segment--problem {
+  background: var(--color-status-error);
+}
+
+/* Legend lines are whitespace-pre with three spaces around each bullet. */
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+  white-space: pre;
+}
+
+.quick-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  align-items: flex-start;
+}
+
+.quick-actions .k-button {
+  width: 196px;
+}
+
+/*
+ * Recent Shipments Table (114:228). The frame is 1136px wide around fixed
+ * 1120px rows and does not clip its children, so the 1px outline is painted
+ * underneath them exactly like the Figma stroke: it shows only where no row
+ * covers it (the right-hand gutter and the rounded corners on that side).
+ */
+/* Below 1136px of content the table scrolls sideways (Responsive Tests, 27). */
+.recent-table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.recent-table {
+  width: 1136px;
+  border-radius: var(--radius-lg);
+  background: var(--color-background-surface);
+  box-shadow: inset 0 0 0 1px var(--color-border-default);
+}
+
+.recent-table__header,
+.recent-table__row {
+  display: flex;
+  width: 1120px;
+}
+
+.recent-table__header {
+  height: 44px;
+  background: var(--color-background-subtle);
+}
+
+/* The row divider is an inside stroke: it must not shift the centred cells. */
+.recent-table__row {
+  height: 52px;
+  background: var(--color-background-surface);
+  box-shadow: inset 0 1px 0 var(--color-border-default);
+}
+
+.recent-table__cell {
+  display: flex;
+  flex: none;
+  align-items: center;
+  min-width: 0;
+  padding-left: var(--space-12);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.recent-table__header .recent-table__cell {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+}
+
+.recent-table__row .recent-table__cell {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+  color: var(--color-text-primary);
+}
+
+.recent-table__cell--actions {
+  justify-content: center;
+}
+
+/* ----------------------------------------------------------------- Banners */
+/*
+ * Figma: Persistent Banner (7:755) and API Error (7:613). Status colours stay
+ * on the borders; body-size labels use the status text colours so they meet
+ * the 4.5:1 rule of "28 — Accessibility" (Contrast & Target Sizes, 22:54).
+ */
+
+.banner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: calc(var(--space-12) - 1px) calc(var(--space-16) - 1px);
+  border: 1px solid var(--color-status-warning);
+  border-radius: var(--radius-md);
+  background: var(--color-background-surface);
+}
+
+.banner__title {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--color-status-warning-text);
+}
+
+.banner__text {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+.banner--success {
+  border-color: var(--color-status-success);
+}
+
+.banner--success .banner__title {
+  color: var(--color-status-success-text);
+}
+
+.banner--error {
+  border-color: var(--color-status-error);
+}
+
+.banner--error .banner__title {
+  color: var(--color-status-error);
+}
+
+.banner[tabindex='-1']:focus {
+  outline: none;
+}
+
+/* ------------------------------------------------------------ Detail views */
+/* Figma: Shipment Detail (10:2) — 700px main column, 428px aside, 8px gaps. */
+
+/* Responsive / Shipment Detail (21:2266): the view stops growing at 1296px. */
+.detail-header,
+.detail-columns {
+  max-width: 1296px;
+}
+
+.detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-24);
+}
+
+.detail-header__identity {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  min-width: 0;
+}
+
+.detail-header__breadcrumb {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+  white-space: pre;
+}
+
+.detail-header__title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.detail-header__title {
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.detail-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+/* Detail Main is a fixed 700px column; Detail Aside takes the rest (10:145). */
+.detail-columns {
+  display: grid;
+  grid-template-columns: 700px minmax(0, 1fr);
+  gap: var(--space-16);
+  align-items: start;
+}
+
+.detail-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  min-width: 0;
+}
+
+.detail-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: calc(var(--space-16) - 1px);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background: var(--color-background-surface);
+}
+
+.detail-section__title {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.detail-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-16);
+}
+
+.detail-row__label {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+}
+
+.detail-row__value {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  text-align: right;
+  word-break: break-word;
+}
+
+/* Tracking numbers and IDs are monospace with a copy action (29 — Handoff). */
+.detail-row__value--mono {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+.error-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-8);
+  padding: calc(var(--space-24) - 1px);
+  border: 1px solid var(--color-status-error);
+  border-radius: var(--radius-lg);
+  background: var(--color-background-surface);
+}
+
+.error-card__title {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--color-status-error);
+}
+
+.error-card__text {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+/* ---------------------------------------------------------- Filter toolbar */
+/* Figma: Shipments Filter Toolbar (9:139) — 12px padding, 12px gaps. */
+
+.filter-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-12);
+  padding: calc(var(--space-12) - 1px);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background: var(--color-background-surface);
+}
+
+.filter-toolbar .k-search {
+  width: 360px;
+  flex: none;
+}
+
+/* A fixed 10×1 group sits between the filters and "Temizle" (9:150). */
+.filter-toolbar__spacer {
+  flex: none;
+  width: 10px;
+  height: 1px;
+}
+
+.filter-toolbar__clear {
+  flex: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--color-brand-text);
+}
+
+/* Active Filters (9:405 / 9:656). */
+.active-filters {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  min-height: 34px;
+}
+
+.active-filters__count {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+/* The chip label and its "×" are one whitespace-pre run in the frame. */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  white-space: pre;
+  padding: calc(var(--space-8) - 1px) calc(var(--space-12) - 1px);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-full);
+  background: var(--color-background-subtle);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.chip__remove {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+}
+
+/* ------------------------------------------------------- Row actions menu */
+/* Figma: Shipment Row Actions / Menu (9:1786) — 240px, 34px rows. */
+
+.row-menu-host {
+  position: relative;
+  display: inline-flex;
+}
+
+.row-menu {
+  position: fixed;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 240px;
+  padding: calc(var(--space-8) - 1px);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background: var(--color-background-surface);
+}
+
+.row-menu__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  width: 100%;
+  padding: var(--space-8) var(--space-12);
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  text-align: left;
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-text-primary);
+}
+
+.row-menu__item:hover:not(:disabled),
+.row-menu__item:focus-visible {
+  background: var(--color-background-subtle);
+}
+
+.row-menu__item:focus-visible {
+  outline-offset: -2px;
+}
+
+.row-menu__item--danger {
+  color: var(--color-status-error);
+}
+
+.row-menu__item:disabled {
+  opacity: 0.48;
+}
+
+/* ------------------------------------------------------------------- Forms */
+/* Figma: Create Shipment (11:2…) — 920px readable form column, 16px stack. */
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  width: 920px;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+/* Price comparison uses the wider 1040px readable width (29 — Handoff). */
+.form-wrapper--wide {
+  width: 1040px;
+}
+
+.form-wrapper__title {
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.form-wrapper__description {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-secondary);
+}
+
+.form-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  padding: calc(var(--space-20) - 1px);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background: var(--color-background-surface);
+}
+
+.form-panel__title {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* Field Row (11:306): two 420px field frames, 16px apart. */
+.field-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-16);
+}
+
+.field-row > .k-field {
+  width: 420px;
+}
+
+/* Standalone fields keep the 320px control width from the Text Field master. */
+.field-narrow {
+  width: 320px;
+  max-width: 100%;
+}
+
+.form-hint {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+/* Locations / Error (15:2520): the selector hint turns status/error. */
+.form-hint--error {
+  color: var(--color-status-error);
+}
+
+.form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-12);
+}
+
+/* Right-aligned form actions (Warehouse "Actions", 15:1930). */
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-12);
+}
+
+/* Sender Mode (11:144) — two equal, square-cornered choices. */
+.mode-switch {
+  display: flex;
+  width: 100%;
+}
+
+.mode-switch__option {
+  flex: 1 0 0;
+  min-width: 0;
+  padding: calc(var(--space-12) - 1px) calc(var(--space-16) - 1px);
+  border: 1px solid var(--color-border-default);
+  background: var(--color-background-surface);
+  text-align: left;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.mode-switch__option[aria-checked='true'] {
+  border-color: var(--color-focus-ring);
+  background: var(--color-brand-subtle);
+  color: var(--color-brand-text);
+}
+
+.package-tools {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-12);
+}
+
+.package-tools__count {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+.package-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.summary-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-16);
+}
+
+.summary-row__label {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+.summary-row__value {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  text-align: right;
+}
+
+.summary-edit {
+  align-self: flex-start;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--color-brand-text);
+}
+
+.next-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+/* -------------------------------------------------------- Price comparison */
+/* Figma: Price Comparison (13:2 … 13:971) — 1040px wrapper. */
+
+/* Shipment Summary (13:341): four equal columns, 24px apart. */
+.pricing-summary {
+  display: flex;
+  gap: var(--space-24);
+  padding: calc(var(--space-16) - 1px);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background: var(--color-background-surface);
+  white-space: nowrap;
+}
+
+.pricing-summary__item {
+  display: flex;
+  flex: 1 0 0;
+  min-width: 1px;
+  flex-direction: column;
+  gap: var(--space-4);
+  overflow: hidden;
+  background: var(--color-background-surface);
+}
+
+.pricing-summary__label {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-text-secondary);
+}
+
+.pricing-summary__value {
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  text-overflow: ellipsis;
+}
+
+/*
+ * Carrier Options (13:354). Rows run edge to edge under the panel stroke, as
+ * Figma paints a frame stroke above its children; the ::after ring does the
+ * same here so the 16px row insets are measured from the outer edge.
+ */
+.carrier-table {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg);
+  background: var(--color-background-surface);
+  overflow: hidden;
+}
+
+.carrier-table::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--color-border-default);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Carrier Header (13:355): surface label cells on a subtle 48px band. */
+.carrier-header {
+  display: flex;
+  flex: none;
+  align-items: flex-start;
+  padding: var(--space-12) var(--space-16);
+  background: var(--color-background-subtle);
+}
+
+.carrier-header__cell {
+  display: flex;
+  flex: none;
+  align-items: center;
+  height: 24px;
+  overflow: hidden;
+  background: var(--color-carrier-cell);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+/* Carrier rows (13:919 …): 40px surface cells inside a 64px row. */
+.carrier-row {
+  display: flex;
+  flex: none;
+  align-items: flex-start;
+  padding: var(--space-12) var(--space-16);
+  background: var(--color-background-surface);
+}
+
+.carrier-row--automatic {
+  background: var(--color-carrier-automatic);
+}
+
+.carrier-row--unavailable {
+  opacity: 0.55;
+}
+
+.carrier-cell {
+  display: flex;
+  flex: none;
+  align-items: center;
+  height: 40px;
+  min-width: 0;
+  overflow: hidden;
+  background: var(--color-carrier-cell);
+  white-space: nowrap;
+}
+
+.carrier-cell--identity {
+  gap: var(--space-12);
+}
+
+.carrier-cell--price {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.carrier-cell--meta {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+.carrier-cell--available {
+  color: var(--color-status-success-text);
+}
+
+/* The action stays centred and its focus ring must not be clipped. */
+.carrier-cell--action {
+  justify-content: center;
+  overflow: visible;
+}
+
+/* "Otomatik Seç" is a fixed 132px instance (13:931); the others hug. */
+.carrier-row--automatic .k-button {
+  width: 132px;
+}
+
+.carrier-badge {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  background: var(--color-background-subtle);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  color: var(--color-carrier-logo);
+}
+
+.carrier-name {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  text-overflow: ellipsis;
+}
+
+.carrier-best {
+  flex: none;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--color-status-success-text);
+}
+
+/* Skeleton Carrier (13:366): five 14px bars, 54px rows. */
+.carrier-skeleton {
+  display: flex;
+  flex: none;
+  align-items: flex-start;
+  gap: var(--space-16);
+  padding: var(--space-20) var(--space-16);
+  background: var(--color-background-surface);
+}
+
+.carrier-skeleton__bar {
+  flex: none;
+  height: 14px;
+  border-radius: var(--radius-sm);
+  background: var(--color-background-subtle);
+}
+
+/* No Carrier State (13:537): left-aligned Heading 3, Body and one action. */
+.no-carrier {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-12);
+  padding: calc(40px - 1px) calc(var(--space-24) - 1px);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background: var(--color-background-surface);
+}
+
+.no-carrier__title {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.no-carrier__text {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-secondary);
+}
+
+/* ----------------------------------------------------------- Barcode / PDF */
+/* Figma: Barcode (15:2) — square 650px preview area around a 460×560 sheet. */
+
+.pdf-area {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  height: 650px;
+  border: 1px solid var(--color-border-default);
+  background: var(--color-background-subtle);
+  overflow: hidden;
+}
+
+.pdf-sheet {
+  flex: none;
+  width: 460px;
+  height: 560px;
+  border: 1px solid var(--color-border-default);
+  background: var(--color-background-surface);
+}
+
+/* Loading (15:335): an unbordered sheet at 65% while the PDF is fetched. */
+.pdf-placeholder {
+  flex: none;
+  width: 460px;
+  height: 560px;
+  border-radius: var(--radius-md);
+  background: var(--color-background-surface);
+  opacity: 0.65;
+}
+
+/* Barcode Not Ready (15:477) and Error (15:623): a centred 560px state block. */
+.state-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-12);
+  min-height: 560px;
+  padding: calc(var(--space-24) - 1px);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background: var(--color-background-surface);
+  text-align: center;
+}
+
+.state-block__title {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.state-block--error {
+  border-color: var(--color-status-error);
+}
+
+.state-block--error .state-block__title {
+  color: var(--color-status-error);
+}
+
+.state-block__text {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-secondary);
+}
+
+/* ----------------------------------------------------------- Record tables */
+/*
+ * Figma: Webhook Table (54:10) and its Loading state (54:66) — a 1136px table
+ * with a Caption Medium header on a subtle band and 52px rows ruled by an
+ * inside bottom stroke. Like the Carrier Options panel, the outer stroke is
+ * painted above the rows, which run edge to edge. Depolar lists its warehouse
+ * records in the same table.
+ */
+.record-table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.record-table {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 1136px;
+  border-radius: var(--radius-lg);
+  background: var(--color-background-surface);
+  overflow: hidden;
+}
+
+.record-table::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--color-border-default);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.record-table__header,
+.record-table__row,
+.record-table__skeleton-row {
+  display: flex;
+  flex: none;
+}
+
+.record-table__header {
+  height: 44px;
+  background: var(--color-background-subtle);
+}
+
+.record-table__header-cell {
+  display: flex;
+  flex: none;
+  align-items: center;
+  height: 44px;
+  padding-inline: var(--space-12);
+  overflow: hidden;
+  background: var(--color-background-surface);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.record-table__row,
+.record-table__skeleton-row {
+  height: 52px;
+  background: var(--color-background-surface);
+}
+
+.record-table__cell,
+.record-table__skeleton-cell {
+  display: flex;
+  flex: none;
+  align-items: center;
+  height: 52px;
+  min-width: 0;
+  padding-inline: var(--space-12);
+  overflow: hidden;
+  background: var(--color-background-surface);
+}
+
+.record-table__cell {
+  gap: var(--space-8);
+  box-shadow: inset 0 -1px 0 var(--color-border-default);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.record-table__text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.record-table__cell--mono {
+  font-family: var(--font-mono);
+  color: var(--color-text-secondary);
+}
+
+.record-table__cell--muted {
+  color: var(--color-text-secondary);
+}
+
+.record-table__cell--actions {
+  justify-content: center;
+  overflow: visible;
+}
+
+.record-table__skeleton {
+  flex: none;
+  height: 12px;
+  border-radius: var(--radius-md);
+  background: var(--color-background-subtle);
+}
+
+/* Yes/no cells (Durum, Ana Depo): 8px dot plus label; the off value stays
+   secondary on a neutral dot. */
+.record-status {
+  color: var(--color-text-secondary);
+}
+
+.record-status__dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-text-disabled);
+}
+
+.record-status--active {
+  color: var(--color-status-success-text);
+}
+
+.record-status--active .record-status__dot {
+  background: var(--color-status-success);
+}
+
+/* Centred empty block used by Webhooks, Warehouses and Locations. */
+.empty-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-12);
+  min-height: 420px;
+  padding: calc(var(--space-24) - 1px);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background: var(--color-background-surface);
+  text-align: center;
+}
+
+.empty-block__title {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.empty-block__text {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-secondary);
+}
+
+/* Success cards — Warehouse (15:2063) and Webhook (16:633): a centred 720px card. */
+.success-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-16);
+  width: 720px;
+  max-width: 100%;
+  margin-inline: auto;
+  padding: calc(var(--space-24) - 1px);
+  border: 1px solid var(--color-status-success);
+  border-radius: var(--radius-lg);
+  background: var(--color-background-surface);
+}
+
+.success-panel__title {
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 600;
+  color: var(--color-status-success);
+}
+
+.success-panel__text {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-secondary);
+}
+
+/* --------------------------------------------------------------- Locations */
+/* Figma: Locations Utility (15:2196) — two health cards, cascading selector. */
+
+.health-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-12);
+}
+
+.health-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: calc(var(--space-16) - 1px);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background: var(--color-background-surface);
+}
+
+.health-card__label {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+.health-card__value {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.health-card--success {
+  border-color: var(--color-status-success);
+}
+
+.health-card--success .health-card__value {
+  color: var(--color-status-success-text);
+}
+
+.health-card--warning {
+  border-color: var(--color-status-warning);
+}
+
+.health-card--warning .health-card__value {
+  color: var(--color-status-warning-text);
+}
+
+.health-card--error {
+  border-color: var(--color-status-error);
+}
+
+.health-card--error .health-card__value {
+  color: var(--color-status-error);
+}
+
+/* ------------------------------------------------------------------ Credit */
+/* Figma: Credit (16:2359) — centred 840px wrapper, 24px balance card. */
+
+.credit-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  width: 840px;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.balance-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-8);
+  padding: calc(var(--space-24) - 1px);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background: var(--color-background-surface);
+}
+
+.balance-card__label {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-secondary);
+}
+
+/* Display 32/40 in brand/primary (16:2496). */
+.balance-card__value {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 600;
+  color: var(--color-brand-text);
+}
+
+.balance-card__updated {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-text-secondary);
+}
+
+.balance-card__note {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+/* Balance Loading (16:2634): three bars, 12px apart. */
+.balance-card--loading {
+  gap: var(--space-12);
+}
+
+.balance-card__skeleton {
+  flex: none;
+  border-radius: 5px;
+  background: var(--color-background-subtle);
+}
+
+/* Balance Error (16:2773): status/error stroke and Heading 3 title. */
+.balance-card--error {
+  gap: var(--space-12);
+  border-color: var(--color-status-error);
+}
+
+.balance-card__error-title {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 600;
+  color: var(--color-status-error);
+}
+
+.balance-card__error-text {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-secondary);
+}
+
+/* ---------------------------------------------------------------- Settings */
+/* Figma: Settings (17:2) — 220px section rail + 904px content column. */
+
+.settings-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: var(--space-20);
+  align-items: start;
+}
+
+.settings-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: calc(var(--space-12) - 1px) calc(var(--space-8) - 1px);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background: var(--color-background-surface);
+}
+
+.settings-nav__item {
+  width: 100%;
+  padding: var(--space-12);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  text-align: left;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.settings-nav__item:hover {
+  background: var(--color-background-subtle);
+}
+
+/* Section items take the Nav Item focus treatment: a 2px ring inside. */
+.settings-nav__item:focus-visible {
+  outline-offset: -2px;
+}
+
+.settings-nav__item[aria-current='page'] {
+  background: var(--color-brand-subtle);
+  color: var(--color-brand-text);
+}
+
+/* Responsive / Settings (21:4440, 80:4846): the column caps at 1120px. */
+.settings-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  min-width: 0;
+  max-width: 1120px;
+}
+
+.settings-content__title {
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.settings-content__description {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-secondary);
+}
+
+/* Settings rows (17:790 …): label and value top-aligned, 12px apart. */
+.setting-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-12);
+}
+
+.setting-row__label {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+.setting-row__value {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  text-align: right;
+}
+
+/* Connection actions (17:164) are 8px apart. */
+.settings-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+/* Geliştiriciler (17:1418): Body Medium links in brand/primary. */
+.settings-link {
+  align-self: flex-start;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--color-brand-text);
+  text-align: left;
+}
+
+.settings-link:hover {
+  text-decoration: underline;
+}
+
+/*
+ * Downloading Update (17:1099): a 560×10 subtle track with the brand fill.
+ * The frame stacks the fill under the track; here the fill sits inside it.
+ */
+.update-progress__label {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.update-progress {
+  width: 560px;
+  max-width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--color-background-subtle);
+  overflow: hidden;
+}
+
+.update-progress__bar {
+  display: block;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--color-brand-primary);
+  transition: width 160ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .update-progress__bar {
+    transition: none;
+  }
+}
+
+/* ------------------------------------------------------------- Diagnostics */
+/*
+ * Figma: Diagnostics (18:2) — 660px connection panel beside the application
+ * panel. Both panels hold two rows, so they share one height.
+ */
+
+/* Responsive / Diagnostics (21:4861): header and panels stop at 1400px. */
+.main-content--diagnostics > * {
+  max-width: 1400px;
+}
+
+.diagnostics-grid {
+  display: grid;
+  grid-template-columns: 660px minmax(0, 1fr);
+  gap: var(--space-16);
+  align-items: stretch;
+}
+
+/* Diagnostics panels (18:142 …) use a 16px inset instead of the form 20px. */
+.form-panel--compact {
+  padding: calc(var(--space-16) - 1px);
+}
+
+/* -------------------------------------------------------------- Onboarding */
+/* Figma: Onboarding (6:2…) — centred setup panel, 36/40px padding, 16px stack. */
+
+.setup-shell {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: var(--space-24);
+  background: var(--color-background-canvas);
+}
+
+/*
+ * Responsive / System State (21:4974 … 21:5013): the 640×340 state panel is
+ * centred horizontally and sits 190px from the top at every window size.
+ */
+.setup-shell--state {
+  place-items: start center;
+  padding-top: 190px;
+}
+
+/* Setup Panel (6:10 …): each frame sets its own width inline. */
+.setup-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-16);
+  width: 720px;
+  max-width: 100%;
+  padding: calc(36px - 1px) calc(var(--space-40) - 1px);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-xl);
+  background: var(--color-background-surface);
+}
+
+.setup-panel > .state-box,
+.setup-panel > .setup-panel__actions,
+.setup-panel > .feature-list {
+  align-self: stretch;
+}
+
+.setup-panel__brand {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 600;
+  color: var(--color-brand-text);
+}
+
+.setup-panel__eyebrow {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+.setup-panel__title {
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.setup-panel__text {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-secondary);
+}
+
+/*
+ * Welcome (6:14): Body Large in a 584×36 frame, so its second line runs into
+ * the 16px gap above the feature list exactly as the frame draws it.
+ */
+.setup-panel__lead {
+  flex: none;
+  width: 584px;
+  height: 36px;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-text-secondary);
+}
+
+.setup-panel__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-12);
+}
+
+/* Connection Testing (6:64) shows its locked action at 65%. */
+.setup-panel .k-button--loading:disabled {
+  opacity: 0.65;
+}
+
+.feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-primary);
+}
+
+/*
+ * State / info and State / error boxes: the error tone only colours the title,
+ * in the status text colour so it keeps 4.5:1 on the subtle fill.
+ */
+.state-box {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: calc(var(--space-16) - 1px);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background: var(--color-background-subtle);
+}
+
+.state-box__title {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.state-box__text {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+.state-box--error .state-box__title {
+  color: var(--color-status-error-text);
+}
+
+/* "Ağ Tanılamasını Aç" during setup shows Tanılama without the shell. */
+.setup-diagnostics {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: var(--space-16);
+  background: var(--color-background-canvas);
+}
+
+.setup-diagnostics > div:first-child {
+  padding-inline: var(--space-24);
+}
+
+/* Onboarding / Splash (6:2): a 252×182 block on the canvas, 20px stack. */
+.splash {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-20);
+  width: 252px;
+  height: 182px;
+  text-align: center;
+}
+
+.splash__brand {
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 600;
+  color: var(--color-brand-text);
+}
+
+.splash__tagline {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-secondary);
+}
+
+.splash__bar {
+  flex: none;
+  width: 180px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--color-brand-primary);
+}
+
+.splash__status {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+.splash__version {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-text-tertiary);
+}
+
+/* ----------------------------------------------------------- System states */
+/* Figma: "24 — System States" (19:5 …) — 24px padding, 10px radius, 16px stack. */
+
+.system-state {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  align-items: flex-start;
+  width: min(640px, 100%);
+  /* Every state frame is a fixed 640×340 block with its content top-aligned. */
+  min-height: 340px;
+  padding: calc(var(--space-24) - 1px);
+  border: 1px solid var(--color-status-warning);
+  border-radius: var(--radius-dialog);
+  background: var(--color-background-surface);
+}
+
+.system-state--error {
+  border-color: var(--color-status-error);
+}
+
+.system-state--neutral {
+  border-color: var(--color-border-default);
+}
+
+/* Payment Required (48:24) is drawn on an 8px corner. */
+.system-state--payment {
+  border-radius: var(--radius-lg);
+}
+
+.system-state__meta {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-16);
+  width: 100%;
+}
+
+.system-state__identity {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--color-status-warning-text);
+}
+
+.system-state--error .system-state__identity {
+  color: var(--color-status-error);
+}
+
+.system-state--neutral .system-state__identity {
+  color: var(--color-brand-text);
+}
+
+.system-state--payment .system-state__identity {
+  font-weight: 500;
+  color: var(--color-status-warning-text);
+}
+
+/* The State Icon instance (98:10978) stays on icon/color; only the label takes
+   the status colour. */
+.system-state__identity .icon {
+  color: var(--icon-color);
+}
+
+.system-state__code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+.system-state--payment .system-state__code {
+  font-family: var(--font-sans);
+}
+
+.system-state__title {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.system-state__description {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-secondary);
+}
+
+.system-state__guidance {
+  width: 100%;
+  padding: var(--space-12);
+  border-radius: var(--radius-md);
+  background: var(--color-background-subtle);
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+.system-state--payment .system-state__guidance {
+  background: var(--color-status-warning-subtle);
+  color: var(--color-status-warning-text);
+}
+
+/*
+ * "Spacer / Divider" (19:13 …): an 8px step between the guidance box and the
+ * actions. Payment Required uses "Spacer / Flexible" (48:32), which grows so
+ * the actions sit on the bottom edge of the 340px frame.
+ */
+.system-state__spacer {
+  flex: 0 0 8px;
+}
+
+.system-state--payment .system-state__spacer {
+  flex-grow: 1;
+}
+
+.system-state__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-8);
+  width: 100%;
+}
+
+/* Loading placeholders that match the Figma skeleton rhythm. */
+/*
+ * Dashboard / Loading (7:250): the overview draws four 620×18 bars (5px corner,
+ * 70% opacity) and the recent list three 44px rows (6px corner, 65% opacity).
+ */
+.skeleton-line {
+  height: 18px;
+  border-radius: 5px;
+  background: var(--color-background-subtle);
+  opacity: 0.7;
+}
+
+.skeleton-stack--lines .skeleton-line {
+  width: 620px;
+  max-width: 100%;
+}
+
+.skeleton-block {
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--color-background-subtle);
+  opacity: 0.65;
+}
+
+/* The recent-shipments placeholders keep the table width (7:427). */
+.section-stack .skeleton-block {
+  width: 1136px;
+  max-width: 100%;
+}
+
+.skeleton-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}

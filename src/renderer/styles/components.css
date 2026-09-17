@@ -1,0 +1,1123 @@
+/*
+ * Component layer — 1:1 with the Figma masters on
+ * "06 — Components", "07 — Components Advanced" and "25 — Dialogs & Overlays".
+ * Every size, radius, colour and type step below is transcribed from those frames.
+ */
+
+/* ------------------------------------------------------------------ Button */
+/*
+ * Figma: Button (3:32) — Hierarchy × Size × State. Borders are Figma inside
+ * strokes, so a bordered hierarchy gives back 1px of its padding to keep the
+ * hugged width identical. Leading icons use icon/color, which the Primary
+ * variant overrides to neutral/50 (7:137, 106:4558).
+ */
+
+.k-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  border: 0 solid transparent;
+  border-radius: var(--radius-md);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.k-button--sm {
+  height: var(--control-height-sm);
+  padding-inline: var(--space-12);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+}
+
+.k-button--md {
+  height: var(--control-height-md);
+  padding-inline: var(--space-16);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.k-button--lg {
+  height: var(--control-height-lg);
+  padding-inline: var(--space-20);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.k-button .icon {
+  color: var(--icon-color);
+}
+
+.k-button--sm .icon {
+  width: 14px;
+  height: 14px;
+}
+
+.k-button--md .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.k-button--lg .icon {
+  width: 18px;
+  height: 18px;
+}
+
+.k-button--primary {
+  --icon-color: var(--primitive-neutral-50);
+  background: var(--color-brand-primary);
+  color: var(--color-text-on-brand);
+}
+
+.k-button--primary:hover:not(:disabled) {
+  background: var(--color-brand-primary-hover);
+}
+
+.k-button--primary:active:not(:disabled) {
+  background: var(--color-brand-primary-pressed);
+}
+
+.k-button--secondary {
+  border: 1px solid var(--color-border-default);
+  background: var(--color-background-surface);
+  color: var(--color-text-primary);
+}
+
+.k-button--secondary.k-button--sm {
+  padding-inline: calc(var(--space-12) - 1px);
+}
+
+.k-button--secondary.k-button--md {
+  padding-inline: calc(var(--space-16) - 1px);
+}
+
+.k-button--secondary.k-button--lg {
+  padding-inline: calc(var(--space-20) - 1px);
+}
+
+.k-button--secondary:hover:not(:disabled) {
+  background: var(--color-background-subtle);
+}
+
+.k-button--tertiary {
+  background: var(--color-brand-subtle);
+  color: var(--color-brand-text);
+}
+
+.k-button--tertiary:hover:not(:disabled) {
+  color: var(--color-brand-text-hover);
+}
+
+.k-button--ghost {
+  background: var(--color-background-surface);
+  color: var(--color-text-primary);
+}
+
+.k-button--ghost:hover:not(:disabled) {
+  background: var(--color-background-subtle);
+}
+
+.k-button--destructive {
+  --icon-color: var(--primitive-neutral-50);
+  background: var(--color-action-destructive);
+  color: var(--color-text-on-destructive);
+}
+
+.k-button--destructive:hover:not(:disabled) {
+  background: var(--color-action-destructive-hover);
+}
+
+/* Interaction State Contract (81:2): Disabled → text/disabled + background/subtle. */
+.k-button--loading:disabled {
+  opacity: 0.55;
+  cursor: progress;
+}
+
+.k-button:disabled:not(.k-button--loading) {
+  --icon-color: var(--color-text-disabled);
+  background: var(--color-background-subtle);
+  color: var(--color-text-disabled);
+  cursor: not-allowed;
+}
+
+/* ------------------------------------------------------------- Icon Button */
+/* Figma: Icon Button (94:99) — Size 32/40 × State. */
+
+.k-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  background: var(--color-background-surface);
+  color: var(--icon-color);
+}
+
+.k-icon-button--sm {
+  width: 32px;
+  height: 32px;
+}
+
+.k-icon-button--sm .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.k-icon-button--md {
+  width: 40px;
+  height: 40px;
+}
+
+.k-icon-button--md .icon {
+  width: 18px;
+  height: 18px;
+}
+
+.k-icon-button:hover:not(:disabled) {
+  background: var(--color-background-subtle);
+}
+
+/* Icon Button / Focus (94:69, 94:89): the 1px border becomes a 2px focus ring
+   on the hit area itself. */
+.k-icon-button:focus-visible {
+  outline: none;
+  border-color: var(--color-focus-ring);
+  box-shadow: inset 0 0 0 1px var(--color-focus-ring);
+}
+
+.k-icon-button:disabled {
+  opacity: 0.48;
+}
+
+/* ------------------------------------------------------------------- Field */
+/* Figma: Text Field (3:67), Select Field (49:38). */
+
+/*
+ * Text Field (3:67) and Select Field (49:38) are fixed 80px frames — label,
+ * 8px, 40px control — 320px wide by default. A message sits below the control
+ * and may extend past the frame without moving the next row. Text controls
+ * keep the master's 320px width even when a row widens the frame to 420px
+ * (Create Shipment 11:307); select controls fill their frame (11:320).
+ */
+.k-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  align-items: flex-start;
+  width: 320px;
+  max-width: 100%;
+  height: 80px;
+  min-width: 0;
+}
+
+.k-field--textarea {
+  height: auto;
+}
+
+.k-field__label {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.k-field__control {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--space-8);
+  width: 320px;
+  max-width: 100%;
+  height: var(--control-height-md);
+  padding-inline: calc(var(--space-12) - 1px);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  background: var(--color-background-surface);
+  color: var(--color-text-primary);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.k-field__control--lg {
+  height: var(--control-height-lg);
+}
+
+.k-field__control::placeholder {
+  color: var(--color-text-secondary);
+}
+
+textarea.k-field__control {
+  height: auto;
+  min-height: 96px;
+  padding-block: 10px;
+  resize: vertical;
+}
+
+/* Focus paints the designed 2px ring without shifting the inner baseline. */
+.k-field__control:focus,
+.k-field__control:focus-visible {
+  outline: none;
+  border-color: var(--color-focus-ring);
+  box-shadow: inset 0 0 0 1px var(--color-focus-ring);
+}
+
+.k-field--error .k-field__control {
+  border-color: var(--color-status-error);
+}
+
+.k-field--success .k-field__control {
+  border-color: var(--color-status-success);
+}
+
+.k-field__control:disabled,
+.k-field__control[readonly],
+.k-field--loading .k-field__control {
+  background: var(--color-background-subtle);
+  border-color: var(--color-border-default);
+}
+
+/* Settings · API Token (17:155) shows its mask on the Default surface. */
+.k-field__control--masked[readonly] {
+  background: var(--color-background-surface);
+}
+
+.k-field__control:disabled {
+  color: var(--color-text-disabled);
+}
+
+.k-field--loading .k-field__control {
+  color: var(--color-text-secondary);
+}
+
+.k-field__message {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  color: var(--color-status-error-text);
+}
+
+.k-field__hint {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  color: var(--color-text-tertiary);
+}
+
+.k-field--textarea .k-field__control,
+.k-field--select .k-field__control {
+  width: 100%;
+}
+
+/* Select Field trigger: value, flexible spacer, 16px chevron. */
+.k-select-trigger {
+  justify-content: space-between;
+  text-align: left;
+}
+
+.k-select-trigger__value {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.k-select-trigger__value--placeholder {
+  color: var(--color-text-secondary);
+}
+
+.k-select-trigger .icon {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  color: var(--icon-color);
+}
+
+/* Select Field / Focus (49:9) is a 1px focus-ring border. */
+.k-select-trigger:focus,
+.k-select-trigger:focus-visible,
+.k-field--open .k-select-trigger {
+  outline: none;
+  border-color: var(--color-focus-ring);
+  box-shadow: none;
+}
+
+.k-field--error .k-select-trigger {
+  border-color: var(--color-status-error);
+}
+
+/* Select Field / Disabled (49:24): value or placeholder reads as disabled. */
+.k-select-trigger:disabled {
+  background: var(--color-background-subtle);
+  border-color: var(--color-border-default);
+  color: var(--color-text-disabled);
+}
+
+.k-select-trigger:disabled .k-select-trigger__value {
+  color: var(--color-text-disabled);
+}
+
+/* Select Field / Error (49:16) keeps its text in text/primary. */
+.k-field--error .k-select-trigger__value--placeholder {
+  color: var(--color-text-primary);
+}
+
+/*
+ * Select Field / Loading (49:31) stays on surface with a secondary
+ * "Yükleniyor…"; the Locations instance (15:2365) sits at 65% opacity.
+ */
+.k-field--select.k-field--loading {
+  opacity: 0.65;
+}
+
+.k-field--select.k-field--loading .k-select-trigger {
+  background: var(--color-background-surface);
+}
+
+/* ------------------------------------------------------------ Search Field */
+/* Figma: Search Field (94:119) — 360×40, 18px leading icon. */
+
+.k-search {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  height: var(--control-height-md);
+  padding: 9px calc(var(--space-12) - 1px);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  background: var(--color-background-surface);
+}
+
+.k-search .icon {
+  width: 18px;
+  height: 18px;
+}
+
+.k-search__input {
+  flex: 1 0 0;
+  min-width: 0;
+  border: 0;
+  background: none;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--color-text-primary);
+}
+
+.k-search__input:focus-visible {
+  outline: none;
+}
+
+.k-search__input::placeholder {
+  color: var(--color-text-secondary);
+}
+
+.k-search:focus-within {
+  border-color: var(--color-focus-ring);
+  box-shadow: inset 0 0 0 1px var(--color-focus-ring);
+}
+
+.k-search--disabled {
+  background: var(--color-background-subtle);
+  opacity: 0.55;
+}
+
+/* ------------------------------------------------------------- Select Menu */
+/* Figma: Select Menu (52:22). */
+
+.k-menu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: calc(var(--space-8) - 1px);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background: var(--color-background-elevated);
+}
+
+.k-menu--error {
+  border-color: var(--color-status-error);
+}
+
+.k-menu__option {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: var(--control-height-md);
+  padding-inline: var(--space-12);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  text-align: left;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--color-text-primary);
+}
+
+.k-menu__option[aria-selected="true"] {
+  background: var(--color-brand-subtle);
+  color: var(--color-brand-text);
+}
+
+.k-menu__option--active:not([aria-selected="true"]) {
+  background: var(--color-background-subtle);
+}
+
+.k-menu__option-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.k-menu--popover {
+  position: fixed;
+  z-index: 30;
+  width: 320px;
+  overflow-y: auto;
+}
+
+.k-menu--popover:focus-visible {
+  outline: none;
+}
+
+/* Filter trigger (Shipments / Filter Toolbar 9:142): a 40px box with a Body
+   Small label and no indicator glyph. */
+.filter-box {
+  display: flex;
+  flex: none;
+  align-items: center;
+  height: var(--control-height-md);
+  padding-inline: calc(var(--space-12) - 1px);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  background: var(--color-background-surface);
+  overflow: hidden;
+  text-align: left;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.filter-box:hover {
+  background: var(--color-background-subtle);
+}
+
+/* Keyboard focus uses the same inside 2px ring as the open state. */
+.filter-box:focus-visible,
+.filter-box[aria-expanded="true"] {
+  outline: none;
+  border-color: var(--color-focus-ring);
+  box-shadow: inset 0 0 0 1px var(--color-focus-ring);
+}
+
+.k-menu__title {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+.k-menu--error .k-menu__title {
+  color: var(--color-status-error-text);
+}
+
+.k-menu__hint {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-text-tertiary);
+}
+
+.k-menu--error .k-menu__hint {
+  color: var(--color-text-secondary);
+}
+
+/* ------------------------------------------------------------------ Switch */
+/* Figma: Switch (51:15) — 40×24 track, 18px knob, 3px inset. */
+
+.k-switch {
+  position: relative;
+  flex: none;
+  width: 40px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--color-border-strong);
+}
+
+.k-switch::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-full);
+  background: var(--primitive-neutral-0);
+  transition: transform 120ms ease;
+}
+
+.k-switch[aria-checked="true"] {
+  background: var(--color-brand-primary);
+}
+
+.k-switch[aria-checked="true"]::after {
+  transform: translateX(16px);
+}
+
+.k-switch:disabled {
+  background: var(--color-background-subtle);
+}
+
+.k-switch:disabled::after {
+  background: var(--color-text-disabled);
+}
+
+.k-switch-field__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.k-switch-field__state {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-primary);
+}
+
+.k-switch-field__state--disabled {
+  color: var(--color-text-disabled);
+}
+
+/* ------------------------------------------------------- Segmented Control */
+/* Figma: Segmented Control (72:106) — 44px shell, 36px segments. */
+
+.k-segmented {
+  display: flex;
+  gap: var(--space-4);
+  height: 44px;
+  padding: calc(var(--space-4) - 1px);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background: var(--color-segment-track);
+}
+
+.k-segmented__item {
+  display: flex;
+  flex: 1 0 0;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: transparent;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+/* Segment focus stays inside the 44px track. */
+.k-segmented__item:focus-visible {
+  outline-offset: -2px;
+}
+
+.k-segmented__item[aria-checked="true"] {
+  border-color: var(--color-border-default);
+  background: var(--color-segment-selected);
+  color: var(--color-text-primary);
+}
+
+/* ------------------------------------------------------------ Status pills */
+/* Figma: Shipment Status Badge (3:107), API Connection Status (3:126). */
+
+.k-status {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  height: 28px;
+  padding: var(--space-4) var(--space-12);
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.k-status__dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+}
+
+.k-status--neutral {
+  background: var(--color-status-neutral-subtle);
+  color: var(--color-status-neutral-text);
+}
+
+.k-status--neutral .k-status__dot {
+  background: var(--color-text-secondary);
+}
+
+.k-status--information {
+  background: var(--color-status-information-subtle);
+  color: var(--color-status-information-text);
+}
+
+.k-status--information .k-status__dot {
+  background: var(--color-status-information);
+}
+
+.k-status--success {
+  background: var(--color-status-success-subtle);
+  color: var(--color-status-success-text);
+}
+
+.k-status--success .k-status__dot {
+  background: var(--color-status-success);
+}
+
+.k-status--warning {
+  background: var(--color-status-warning-subtle);
+  color: var(--color-status-warning-text);
+}
+
+.k-status--warning .k-status__dot {
+  background: var(--color-status-warning);
+}
+
+.k-status--error {
+  background: var(--color-status-error-subtle);
+  color: var(--color-status-error-text);
+}
+
+.k-status--error .k-status__dot {
+  background: var(--color-status-error);
+}
+
+/* -------------------------------------------------------------- Grid table */
+/*
+ * Shipment Table (8:245). Header cells and 48px body cells are filled surfaces
+ * laid over the frame, so the 1px frame stroke is painted beneath them and the
+ * table reads as a plain surface block. Body rows are 52px with the cells
+ * pinned to the top; the Durum cell spans the full row with an 8px inset.
+ */
+.grid-table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.grid-table {
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  border-radius: var(--radius-lg);
+  background: var(--color-background-surface);
+  box-shadow: inset 0 0 0 1px var(--color-border-default);
+}
+
+.grid-table__header {
+  display: flex;
+  height: 44px;
+  background: var(--color-background-subtle);
+}
+
+.grid-table__header-cell {
+  display: flex;
+  flex: none;
+  align-items: center;
+  height: 44px;
+  padding-inline: var(--space-12);
+  overflow: hidden;
+  background: var(--color-background-surface);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.grid-table__row {
+  display: flex;
+  align-items: flex-start;
+  height: 52px;
+  background: var(--color-background-surface);
+}
+
+.grid-table__cell {
+  display: flex;
+  flex: none;
+  align-items: center;
+  height: 48px;
+  min-width: 0;
+  padding-inline: var(--space-12);
+  overflow: hidden;
+  background: var(--color-background-surface);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.grid-table__cell > :where(span, button) {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Row identifiers stay body text in the design; only the pointer marks them
+   as a target, so the control inherits the cell type instead of link styling. */
+.grid-table__link {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+}
+
+.grid-table__link:hover {
+  text-decoration: underline;
+}
+
+.grid-table__cell--muted {
+  color: var(--color-text-secondary);
+}
+
+.grid-table__cell--status {
+  height: 52px;
+  padding-inline: var(--space-8) 0;
+}
+
+.grid-table__cell--status .k-status {
+  align-self: center;
+}
+
+.grid-table__cell--actions {
+  justify-content: center;
+  overflow: visible;
+}
+
+.grid-table__skeleton-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  height: 52px;
+  padding-inline: var(--space-12);
+  background: var(--color-background-surface);
+}
+
+.grid-table__skeleton {
+  flex: none;
+  height: 12px;
+  border-radius: var(--radius-sm);
+  background: var(--color-background-subtle);
+}
+
+.grid-table__state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-12);
+  height: 250px;
+  padding-inline: var(--space-24);
+  background: var(--color-background-surface);
+  text-align: center;
+}
+
+.grid-table__state-title {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.grid-table__state-title--error {
+  color: var(--color-status-error);
+}
+
+.grid-table__state-text {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+/* Pagination row (8:96) — one Body Small run on each side. */
+.text-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+  padding-inline: var(--space-16);
+  background: var(--color-background-surface);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.text-pagination__pages {
+  white-space: pre;
+}
+
+.text-pagination__link {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+}
+
+.text-pagination__link:hover:not(:disabled) {
+  color: var(--color-text-primary);
+}
+
+.text-pagination__link:disabled {
+  cursor: default;
+}
+
+/* ------------------------------------------------------------------ Dialog */
+/* Figma: 25 — Dialogs & Overlays — 580px surface, 10px radius, 24px padding. */
+
+.k-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 180px var(--space-24) var(--space-24);
+  overflow-y: auto;
+  background: var(--overlay-scrim);
+}
+
+.main-modal-root > .k-dialog-backdrop {
+  position: absolute;
+}
+
+.k-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  width: min(580px, 100%);
+  padding: calc(var(--space-24) - 1px);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-dialog);
+  background: var(--color-background-surface);
+}
+
+.k-dialog--warning {
+  border-color: var(--color-status-warning);
+}
+
+.k-dialog--error {
+  border-color: var(--color-status-error);
+}
+
+.k-dialog--error .k-dialog__title {
+  color: var(--color-status-error);
+}
+
+.k-dialog__title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.k-dialog__title {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.k-dialog__body {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-secondary);
+}
+
+.k-dialog__meta {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+/* Delete Webhook Dialog (16:941): the endpoint in Code / Monospace. */
+.k-dialog__code {
+  overflow-wrap: anywhere;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+.k-dialog__note {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+.k-dialog__error {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-status-error-text);
+}
+
+.k-dialog__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-8);
+}
+
+/* The glyph always stays on icon/color; the tone lives on border and title. */
+.k-dialog__icon {
+  color: var(--icon-color);
+}
+
+/* ----------------------------------------------------------------- Stepper */
+/* Figma: Stepper (176:345) — 44px row, 26px indicator, 2px connector. */
+
+.k-stepper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  height: 44px;
+}
+
+.k-stepper__step {
+  display: flex;
+  flex: 1 0 0;
+  min-width: 0;
+  align-items: center;
+  gap: var(--space-8);
+  height: 44px;
+}
+
+.k-stepper__indicator {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid transparent;
+  border-radius: 13px;
+  background: var(--color-brand-primary);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  color: var(--primitive-neutral-50);
+}
+
+.k-stepper__step--upcoming .k-stepper__indicator {
+  border-color: var(--color-border-default);
+  background: var(--color-background-surface);
+  color: var(--color-text-secondary);
+}
+
+.k-stepper__label {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.k-stepper__step--upcoming .k-stepper__label {
+  color: var(--color-text-secondary);
+}
+
+.k-stepper__connector {
+  flex: 1 0 0;
+  min-width: 0;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--color-border-default);
+}
+
+.k-stepper__step--completed .k-stepper__connector {
+  background: var(--color-brand-primary);
+}
+
+/* ----------------------------------------------------------------- Tooltip */
+/* Figma: Tooltip (107:11044) — required on every icon-only action. */
+
+.k-tooltip-host {
+  position: relative;
+  display: inline-flex;
+}
+
+.k-tooltip {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  align-items: center;
+  gap: var(--space-8);
+  padding: 5px 9px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-background-elevated);
+  font-size: 12px;
+  line-height: 16px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Hover or keyboard focus shows the label; a mouse click that leaves the
+   control focused does not keep it open, and an open row menu hides it. */
+.k-tooltip-host:hover > .k-tooltip,
+.k-tooltip-host:has(:focus-visible) > .k-tooltip {
+  display: flex;
+}
+
+.k-tooltip-host:has([aria-expanded='true']) > .k-tooltip {
+  display: none;
+}
+
+/* Row-action tooltips hug the right edge so they never widen the table's
+   horizontal scroll area. */
+.grid-table__cell--actions .k-tooltip {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+
+/* Record tables (Webhooks, Depolar) clip their rounded body, so row tooltips
+   open beside the trigger and stay inside the 52px row. */
+.record-table__cell--actions .k-tooltip {
+  top: 50%;
+  right: calc(100% + 6px);
+  left: auto;
+  transform: translateY(-50%);
+}
+
+.k-tooltip__label {
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.k-tooltip__shortcut {
+  font-weight: 400;
+  color: var(--color-text-secondary);
+}

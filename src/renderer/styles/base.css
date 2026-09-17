@@ -1,0 +1,195 @@
+/*
+ * Base layer — reset plus the type scale from Figma page "04 — Typography".
+ * Inter · Turkish character support · enterprise desktop density · min 12px UI text.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 1280px;
+  font-family: var(--font-sans);
+  font-synthesis: none;
+  color: var(--color-text-primary);
+  background: var(--color-background-canvas);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+dl,
+dd {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+/*
+ * Visible focus ring on every interactive element — Accessibility / Focus
+ * States (22:9): a 2px focus-ring stroke 3px outside the control. Controls
+ * whose own frames draw focus inside (fields, icon buttons, nav items) refine
+ * this in their component rules.
+ */
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 3px;
+}
+
+.icon {
+  display: block;
+  flex: none;
+  color: var(--icon-color);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Type scale — names match the Figma text styles one to one. */
+.type-display {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.type-heading-1 {
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.type-heading-2 {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.type-heading-3 {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.type-body-large {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.type-body {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.type-body-medium {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.type-label {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.type-body-small {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+.type-label-small {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+}
+
+.type-label-small-semibold {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 600;
+}
+
+.type-caption {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+.type-caption-medium {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+}
+
+.type-label-xsmall-semibold {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+}
+
+.type-code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

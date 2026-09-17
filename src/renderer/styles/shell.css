@@ -1,0 +1,335 @@
+/*
+ * App shell — Figma page "09 — Navigation".
+ * App Shell / 1440x900 / Expanded (3:194) and / Collapsed (6:175).
+ * Sidebar 248 / 72 · topbar 60 · fluid main content · 24px content padding.
+ */
+
+.app-shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-width-expanded) minmax(0, 1fr);
+  min-height: 100vh;
+  background: var(--color-background-canvas);
+}
+
+.app-shell--collapsed {
+  grid-template-columns: var(--sidebar-width-collapsed) minmax(0, 1fr);
+}
+
+/* ----------------------------------------------------------------- Sidebar */
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  height: 100vh;
+  /* The right stroke is drawn inside the 248 / 72px rail, as in Figma. */
+  padding: var(--space-20) calc(var(--space-12) - 1px) var(--space-16) var(--space-12);
+  border-right: 1px solid var(--color-border-default);
+  background: var(--color-background-surface);
+  overflow: hidden auto;
+}
+
+.sidebar__brand {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.sidebar__tagline {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  color: var(--color-text-tertiary);
+  white-space: nowrap;
+}
+
+.sidebar__group {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: var(--color-text-tertiary);
+}
+
+.sidebar__spacer {
+  flex: 1 0 auto;
+}
+
+/* The nav element must not break the sidebar's own 8px auto-layout rhythm. */
+.sidebar__nav {
+  display: contents;
+}
+
+/*
+ * Nav items as every product screen draws them (e.g. Shipments / Default 9:3):
+ * 12px icon gap, Body Medium in text/secondary, and the current page on a
+ * background/subtle pill with a Label (600) brand/primary label. The glyph
+ * keeps icon/color in both states.
+ */
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  width: 224px;
+  height: var(--control-height-md);
+  padding-inline: var(--space-12);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  text-align: left;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.nav-item .icon {
+  width: 18px;
+  height: 18px;
+  color: var(--icon-color);
+}
+
+.nav-item__label {
+  flex: 1 0 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nav-item:hover {
+  background: var(--color-background-subtle);
+}
+
+/* Nav Item / Focus (65:65, 65:131): a 2px ring drawn inside the item. */
+.nav-item:focus-visible {
+  outline-offset: -2px;
+}
+
+.nav-item[aria-current="page"] {
+  background: var(--color-background-subtle);
+  color: var(--color-brand-text);
+  font-weight: 600;
+}
+
+.nav-item__badge {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 18px;
+  padding-inline: 6px;
+  border-radius: var(--radius-full);
+  background: var(--color-brand-primary);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: var(--color-text-on-brand);
+}
+
+/*
+ * Collapsed rail (6:176) — icon-only 48×40 items with the glyph 12px in
+ * (Nav Item / Mode=Collapsed, 65:83); the label moves into the tooltip.
+ */
+.app-shell--collapsed .nav-item {
+  width: 48px;
+  padding-inline: var(--space-12);
+}
+
+/* Mode=Collapsed, State=Active (65:115): brand-subtle pill and brand glyph. */
+.app-shell--collapsed .nav-item[aria-current="page"] {
+  background: var(--color-brand-subtle);
+}
+
+.app-shell--collapsed .nav-item[aria-current="page"] .icon {
+  color: var(--color-brand-text);
+}
+
+/* Rail tooltips open beside the icon and stay above the sticky topbar. */
+.app-shell--collapsed .sidebar {
+  z-index: 25;
+  overflow: visible;
+}
+
+.app-shell--collapsed .sidebar .k-tooltip {
+  top: 50%;
+  left: calc(100% + 8px);
+  transform: translateY(-50%);
+}
+
+.app-shell--collapsed .sidebar__group,
+.app-shell--collapsed .sidebar__tagline {
+  display: none;
+}
+
+.app-shell--collapsed .nav-item__badge {
+  position: absolute;
+  top: 2px;
+  left: 30px;
+  min-width: 18px;
+  padding-inline: 0;
+}
+
+.nav-item-host {
+  position: relative;
+  display: inline-flex;
+}
+
+/* ------------------------------------------------------------------ Topbar */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  height: var(--topbar-height);
+  padding-inline: var(--space-24);
+  border-bottom: 1px solid var(--color-border-default);
+  background: var(--color-background-surface);
+}
+
+.topbar__lead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.topbar__breadcrumb {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.topbar__meta {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-20);
+}
+
+.topbar__meta-item {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  white-space: pre;
+}
+
+/*
+ * "● API Bağlı" is one Caption Medium text run, bullet included. The API Error
+ * (7:470) and Offline (7:656) frames reuse the success fill with new words;
+ * here the colour follows the words, as "28 — Accessibility" asks status
+ * colour and text to agree (Semantic Status, 22:72).
+ */
+.topbar__connection {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.topbar__connection--success {
+  color: var(--color-status-success-text);
+}
+
+.topbar__connection--warning {
+  color: var(--color-status-warning-text);
+}
+
+.topbar__connection--error {
+  color: var(--color-status-error-text);
+}
+
+/* Modal host: the Main Content area below the topbar and beside the rail. */
+.main-modal-root {
+  position: fixed;
+  top: var(--topbar-height);
+  right: 0;
+  bottom: 0;
+  left: var(--sidebar-width-expanded);
+  z-index: 40;
+}
+
+.app-shell--collapsed .main-modal-root {
+  left: var(--sidebar-width-collapsed);
+}
+
+.main-modal-root:empty {
+  display: none;
+}
+
+/* ------------------------------------------------------------ Main content */
+
+.main-region {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+  flex: 1 0 auto;
+  min-width: 0;
+  padding: var(--space-24);
+  background: var(--color-background-canvas);
+}
+
+/* List screens (Shipments / Default 9:44) stack their sections 16px apart. */
+.main-content--dense {
+  gap: var(--space-16);
+}
+
+/*
+ * Page header group — the product screens (11–23) render Heading 1 28/36 with a
+ * Body 14/20 secondary description in a 60px row, actions spaced 12px apart.
+ * Layout wrappers never paint their own background: only cards, panels and
+ * tables sit on background/surface, so no bands appear on the canvas.
+ */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-24);
+  min-height: 60px;
+}
+
+.page-header__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.page-header__title {
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.page-header__description {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+}
+
+.page-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.page-header__actions--toolbar {
+  gap: var(--space-8);
+}

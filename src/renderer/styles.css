@@ -1,0 +1,22 @@
+/* Kargonomi Desktop renderer stylesheet. Layers follow the Figma file order. */
+
+/*
+ * Inter and Roboto Mono are the two families the design specifies (pages
+ * "04 — Typography" and the Code / Monospace style). They are self-hosted so the
+ * renderer stays inside its `style-src 'self'` content security policy.
+ * Latin + Latin Extended cover the Turkish alphabet.
+ */
+@import '@fontsource/inter/latin-400.css';
+@import '@fontsource/inter/latin-ext-400.css';
+@import '@fontsource/inter/latin-500.css';
+@import '@fontsource/inter/latin-ext-500.css';
+@import '@fontsource/inter/latin-600.css';
+@import '@fontsource/inter/latin-ext-600.css';
+@import '@fontsource/roboto-mono/latin-400.css';
+@import '@fontsource/roboto-mono/latin-ext-400.css';
+
+@import './styles/tokens.css';
+@import './styles/base.css';
+@import './styles/components.css';
+@import './styles/shell.css';
+@import './styles/pages.css';

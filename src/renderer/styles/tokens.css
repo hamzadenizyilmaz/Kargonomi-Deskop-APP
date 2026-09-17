@@ -1,0 +1,278 @@
+/*
+ * Kargonomi Desktop — design tokens.
+ * Mirrors the Figma variable collections on page "03 — Variables"
+ * (file 9ZIA1fhVnuHpMcPNoX0VRg): Primitive Colors → Semantic Colors → Spacing → Radius.
+ * Variable names are kept identical to Figma so handoff stays traceable.
+ */
+
+:root {
+  /* Primitive — neutral */
+  --primitive-neutral-0: #ffffff;
+  --primitive-neutral-50: #f8fafc;
+  --primitive-neutral-100: #f1f5f9;
+  --primitive-neutral-200: #e2e8f0;
+  --primitive-neutral-300: #cbd5e1;
+  --primitive-neutral-400: #94a3b8;
+  --primitive-neutral-500: #64748b;
+  --primitive-neutral-600: #475569;
+  --primitive-neutral-700: #334155;
+  --primitive-neutral-800: #1e293b;
+  --primitive-neutral-900: #0f172a;
+  --primitive-neutral-950: #020617;
+
+  /* Primitive — blue */
+  --primitive-blue-50: #eff6ff;
+  --primitive-blue-600: #2563eb;
+  --primitive-blue-700: #1d4ed8;
+  --primitive-blue-800: #1e40af;
+
+  /* Primitive — status */
+  --primitive-green-50: #f0fdf4;
+  --primitive-green-600: #16a34a;
+  --primitive-green-700: #15803d;
+  --primitive-amber-50: #fffbeb;
+  --primitive-amber-600: #d97706;
+  --primitive-amber-700: #b45309;
+  --primitive-red-50: #fef2f2;
+  --primitive-red-600: #dc2626;
+  --primitive-red-700: #b91c1c;
+
+  /* Semantic — background */
+  --color-background-canvas: var(--primitive-neutral-50);
+  --color-background-surface: var(--primitive-neutral-0);
+  --color-background-elevated: var(--primitive-neutral-0);
+  --color-background-subtle: var(--primitive-neutral-100);
+
+  /* Semantic — border */
+  --color-border-default: var(--primitive-neutral-200);
+  --color-border-strong: var(--primitive-neutral-300);
+
+  /* Semantic — text */
+  --color-text-primary: var(--primitive-neutral-900);
+  --color-text-secondary: var(--primitive-neutral-600);
+  --color-text-tertiary: var(--primitive-neutral-500);
+  --color-text-disabled: var(--primitive-neutral-400);
+  --color-text-on-brand: var(--primitive-neutral-0);
+  --color-text-on-destructive: var(--primitive-neutral-0);
+
+  /*
+   * Semantic — brand.
+   * brand/primary-hover and brand/primary-pressed exist in the Figma variable
+   * collection but no frame renders them, so their values follow the file's own
+   * primitive blue ramp (600 → 700 → 800). Same reasoning for destructive hover.
+   */
+  --color-brand-primary: var(--primitive-blue-600);
+  --color-brand-primary-hover: var(--primitive-blue-700);
+  --color-brand-primary-pressed: var(--primitive-blue-800);
+  --color-brand-subtle: var(--primitive-blue-50);
+  /* Brand colour used as text or a glyph (links, active navigation). */
+  --color-brand-text: var(--color-brand-primary);
+  --color-brand-text-hover: var(--color-brand-primary-hover);
+
+  /* Semantic — action */
+  --color-action-destructive: var(--primitive-red-600);
+  --color-action-destructive-hover: var(--primitive-red-700);
+
+  /* Semantic — focus & icon */
+  --color-focus-ring: var(--primitive-blue-600);
+  --icon-color: var(--primitive-neutral-600);
+
+  /* Semantic — status */
+  --color-status-success: var(--primitive-green-600);
+  --color-status-success-text: var(--primitive-green-700);
+  --color-status-success-subtle: var(--primitive-green-50);
+  --color-status-warning: var(--primitive-amber-600);
+  --color-status-warning-text: var(--primitive-amber-700);
+  --color-status-warning-subtle: var(--primitive-amber-50);
+  --color-status-error: var(--primitive-red-600);
+  --color-status-error-text: var(--primitive-red-700);
+  --color-status-error-subtle: var(--primitive-red-50);
+  --color-status-information: var(--primitive-blue-600);
+  --color-status-information-text: var(--primitive-blue-700);
+  --color-status-information-subtle: var(--primitive-blue-50);
+  --color-status-neutral-text: var(--primitive-neutral-700);
+  --color-status-neutral-subtle: var(--primitive-neutral-100);
+
+  /* Spacing — 8px main grid, 4px micro spacing */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-80: 80px;
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 999px;
+  /* Dialog surfaces use a 10px corner in 25 — Dialogs & Overlays. */
+  --radius-dialog: 10px;
+
+  /*
+   * Dialogs are flat, border-first surfaces with no drop shadow. The Modal
+   * Scrim frames on the Edit (12:374) and Price Comparison (13:750) screens
+   * fill the main content with black at 24%.
+   */
+  --overlay-scrim: rgb(0 0 0 / 24%);
+
+  /* Desktop density (02 — Foundations, 29 — Developer Handoff) */
+  --control-height-sm: 32px;
+  --control-height-md: 40px;
+  --control-height-lg: 48px;
+  --sidebar-width-expanded: 248px;
+  --sidebar-width-collapsed: 72px;
+  --topbar-height: 60px;
+
+  /*
+   * The carrier logo monogram (16 — Price Comparison) is a raw hex on its Light
+   * frame; it is named here so the Dark mode can rebind it.
+   */
+  --color-carrier-logo: #475263;
+
+  /*
+   * Carrier Options fill their cells like the Light frame. Dark mode leaves the
+   * cells clear so the header band and the "Otomatik" row read as solid bands,
+   * and tints that row blue as brand/subtle does in Light.
+   */
+  --color-carrier-cell: var(--color-background-surface);
+  --color-carrier-automatic: var(--color-brand-subtle);
+
+  /* Segmented control: the chosen option is raised above its track. */
+  --color-segment-track: var(--color-background-subtle);
+  --color-segment-selected: var(--color-background-surface);
+
+  /* Type families — Inter for UI, Roboto Mono for the Code / Monospace style. */
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Roboto Mono', ui-monospace, SFMono-Regular, 'Cascadia Mono', 'Segoe UI Mono', Menlo, monospace;
+}
+
+/*
+ * Dark mode. Values are read from the Dark variable mode used by the
+ * "Dark Mode Visual QA" frames on Figma page "27 — Responsive Tests"
+ * (Dark QA / Dashboard 106:4509, Shipments 106:4600, Settings 106:4663,
+ * System State / Offline 106:4733, Dialog / Cancel Shipment 106:4747).
+ * Disabled, strong and elevated follow the same ramp. Colours used as text
+ * (brand links, status labels, error messages) take the 400 step so they keep
+ * WCAG AA contrast on the 900/950 surfaces; filled buttons keep brand/600 and
+ * darken on hover and press so their white labels stay readable.
+ */
+:root[data-theme="dark"] {
+  --color-background-canvas: #020617;
+  --color-background-surface: #0f172a;
+  --color-background-elevated: #0f172a;
+  --color-background-subtle: #1e293b;
+
+  --color-border-default: #334155;
+  --color-border-strong: #475569;
+
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #cbd5e1;
+  --color-text-tertiary: #94a3b8;
+  --color-text-disabled: #64748b;
+  --color-text-on-brand: #ffffff;
+  --color-text-on-destructive: #ffffff;
+
+  --color-brand-primary: #2563eb;
+  --color-brand-primary-hover: #1d4ed8;
+  --color-brand-primary-pressed: #1e40af;
+  --color-brand-subtle: #1e293b;
+  --color-brand-text: #60a5fa;
+  --color-brand-text-hover: #93c5fd;
+
+  --color-action-destructive: #dc2626;
+  --color-action-destructive-hover: #b91c1c;
+
+  --color-focus-ring: #2563eb;
+  --icon-color: #cbd5e1;
+
+  --color-status-success: #16a34a;
+  --color-status-success-text: #4ade80;
+  --color-status-success-subtle: #052e16;
+  --color-status-information: #3b82f6;
+  --color-status-information-text: #60a5fa;
+  --color-status-information-subtle: #172554;
+  --color-status-warning: #d97706;
+  --color-status-warning-text: #fbbf24;
+  --color-status-warning-subtle: #451a03;
+  --color-status-error: #f87171;
+  --color-status-error-text: #f87171;
+  --color-status-error-subtle: #450a0a;
+  --color-status-neutral-text: #f1f5f9;
+  --color-status-neutral-subtle: #1e293b;
+
+  --color-carrier-logo: var(--color-text-secondary);
+  --color-carrier-cell: transparent;
+  --color-carrier-automatic: var(--color-status-information-subtle);
+  --color-segment-track: var(--color-background-canvas);
+  --color-segment-selected: var(--color-background-subtle);
+
+  color-scheme: dark;
+}
+
+/*
+ * Theme "Sistem" (22 — Settings / Appearance). The renderer removes data-theme
+ * for the system option, so the OS preference decides; an explicit
+ * data-theme="light" always wins. The declarations below are a copy of the
+ * block above — CSS has no way to share them across a media query.
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-background-canvas: #020617;
+    --color-background-surface: #0f172a;
+    --color-background-elevated: #0f172a;
+    --color-background-subtle: #1e293b;
+
+    --color-border-default: #334155;
+    --color-border-strong: #475569;
+
+    --color-text-primary: #f8fafc;
+    --color-text-secondary: #cbd5e1;
+    --color-text-tertiary: #94a3b8;
+    --color-text-disabled: #64748b;
+    --color-text-on-brand: #ffffff;
+    --color-text-on-destructive: #ffffff;
+
+    --color-brand-primary: #2563eb;
+    --color-brand-primary-hover: #1d4ed8;
+    --color-brand-primary-pressed: #1e40af;
+    --color-brand-subtle: #1e293b;
+    --color-brand-text: #60a5fa;
+    --color-brand-text-hover: #93c5fd;
+
+    --color-action-destructive: #dc2626;
+    --color-action-destructive-hover: #b91c1c;
+
+    --color-focus-ring: #2563eb;
+    --icon-color: #cbd5e1;
+
+    --color-status-success: #16a34a;
+    --color-status-success-text: #4ade80;
+    --color-status-success-subtle: #052e16;
+    --color-status-information: #3b82f6;
+    --color-status-information-text: #60a5fa;
+    --color-status-information-subtle: #172554;
+    --color-status-warning: #d97706;
+    --color-status-warning-text: #fbbf24;
+    --color-status-warning-subtle: #451a03;
+    --color-status-error: #f87171;
+    --color-status-error-text: #f87171;
+    --color-status-error-subtle: #450a0a;
+    --color-status-neutral-text: #f1f5f9;
+    --color-status-neutral-subtle: #1e293b;
+
+    --color-carrier-logo: var(--color-text-secondary);
+    --color-carrier-cell: transparent;
+    --color-carrier-automatic: var(--color-status-information-subtle);
+    --color-segment-track: var(--color-background-canvas);
+    --color-segment-selected: var(--color-background-subtle);
+
+    color-scheme: dark;
+  }
+}
